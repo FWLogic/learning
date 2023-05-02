@@ -23,9 +23,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3f6f7ch*@tcc)e(1)@y$s0yqxc3%gkclf*=v+#3d6kop^gx$hz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-ALLOWED_HOSTS = []
+PythonAnywhere = False
+if not PythonAnywhere:
+    DEBUG = True
+    ALLOWED_HOSTS = []
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+elif PythonAnywhere:
+    DEBUG = False
+    ALLOWED_HOSTS = ['fwlogic.pythonanywhere.com']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'fwlogic$database',
+            'USER': 'fwlogic',
+            'PASSWORD': 'sc88619973',
+            'HOST': 'fwlogic.mysql.pythonanywhere-services.com'
+        }
+    }
 
 
 # Application definition
@@ -73,17 +95,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'learning_log.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
